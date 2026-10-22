@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video & Music Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fa-brands fa-youtube logo-icon"></i>
+                <h1>MediaFetcher</h1>
+            </div>
+            <p class="subtitle">Download YouTube videos & music directly to your computer</p>
+        </header>
+
+        <main>
+            <div class="card search-card">
+                <form id="url-form" class="url-form">
+                    <div class="input-group">
+                        <i class="fa-solid fa-link input-icon"></i>
+                        <input type="url" id="url-input" placeholder="Paste YouTube link here... (e.g. https://www.youtube.com/watch?v=...)" required>
+                        <button type="submit" id="fetch-btn" class="btn btn-primary">
+                            <span class="btn-text">Analyze</span>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+                <div id="error-message" class="error-box hidden"></div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" class="spinner-container hidden">
+                <div class="spinner"></div>
+                <p>Fetching video details...</p>
+            </div>
+
+            <!-- Preview Card -->
+            <div id="preview-card" class="card preview-card hidden">
+                <div class="media-preview">
+                    <div class="thumbnail-wrapper">
+                        <img id="thumb-img" src="" alt="Thumbnail">
+                        <span id="video-duration" class="badge duration-badge">00:00</span>
+                    </div>
+                    <div class="video-info">
+                        <h2 id="video-title">Video Title</h2>
+                        <p id="video-channel" class="channel"><i class="fa-solid fa-user-circle"></i> <span>Channel Name</span></p>
+                        <p id="video-desc" class="description"></p>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <div class="download-options">
+                    <div class="format-tabs">
+                        <button type="button" class="tab-btn active" data-type="video">
+                            <i class="fa-solid fa-video"></i> Video (MP4)
+                        </button>
+                        <button type="button" class="tab-btn" data-type="audio">
+                            <i class="fa-solid fa-music"></i> Audio Only (Music)
+                        </button>
+                    </div>
+
+                    <div class="option-selectors">
+                        <div class="select-group">
+                            <label for="quality-select" id="quality-label">Select Quality:</label>
+                            <select id="quality-select" class="form-select"></select>
+                        </div>
+
+                        <button id="download-btn" class="btn btn-success btn-large">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Start Download</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progress-container" class="progress-container hidden">
+                    <div class="progress-status">
+                        <span id="progress-text">Downloading...</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <a id="save-file-btn" class="btn btn-primary btn-large hidden" download>
+                        <i class="fa-solid fa-file-arrow-down"></i> Save File to Computer
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 MediaFetcher. Download videos & audio responsibly.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
